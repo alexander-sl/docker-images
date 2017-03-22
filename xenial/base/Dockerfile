@@ -2,7 +2,8 @@ FROM ubuntu:xenial
 MAINTAINER alexsl
 
 RUN apt-get update && apt-get install -y software-properties-common && \
-    apt-get install -y libxext-dev libxrender-dev libxtst-dev sudo vim && \
+    apt-get install -y libxext-dev libxrender-dev libxtst-dev sudo vim \
+    ssh git mercurial subversion vim && \
     apt-get -y clean && \
     mkdir -p /home/alex && \
     echo "alex:x:1000:1000:alex,,,:/home/alex:/bin/bash" >> /etc/passwd && \
