@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y software-properties-common && \
     echo "alex ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/alex && \
     chmod 0440 /etc/sudoers.d/alex && \
     chown alex:alex -R /home/alex
+    sudo apt-get clean -y && \
+    sudo rm -rf /var/lib/apt/lists/* && \
+    sudo rm -rf /tmp/*
 
 USER alex
 ENV HOME /home/alex
