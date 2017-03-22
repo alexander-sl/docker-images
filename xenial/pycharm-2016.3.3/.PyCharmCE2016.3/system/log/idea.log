@@ -1,0 +1,44 @@
+2017-03-22 12:55:32,742 [      0]   INFO -        #com.intellij.idea.Main - ------------------------------------------------------ IDE STARTED ------------------------------------------------------ 
+2017-03-22 12:55:32,751 [      9]   INFO -        #com.intellij.idea.Main - IDE: PyCharm Community Edition (build #PC-163.15188.4, 10 Mar 2017 18:27) 
+2017-03-22 12:55:32,751 [      9]   INFO -        #com.intellij.idea.Main - OS: Linux (4.4.0-66-generic, amd64) 
+2017-03-22 12:55:32,751 [      9]   INFO -        #com.intellij.idea.Main - JRE: 1.8.0_112-release-408-b6 (JetBrains s.r.o) 
+2017-03-22 12:55:32,751 [      9]   INFO -        #com.intellij.idea.Main - JVM: 25.112-b6 (OpenJDK 64-Bit Server VM) 
+2017-03-22 12:55:32,753 [     11]   INFO -        #com.intellij.idea.Main - JVM Args: -Xbootclasspath/a:./lib/boot.jar -Xms128m -Xmx750m -XX:ReservedCodeCacheSize=240m -XX:+UseConcMarkSweepGC -XX:SoftRefLRUPolicyMSPerMB=50 -ea -Dsun.io.useCanonCaches=false -Djava.net.preferIPv4Stack=true -XX:+HeapDumpOnOutOfMemoryError -XX:-OmitStackTraceInFastThrow -Dawt.useSystemAAFontSettings=lcd -Dsun.java2d.renderer=sun.java2d.marlin.MarlinRenderingEngine -XX:ErrorFile=/home/alex/java_error_in_PYCHARM_%p.log -XX:HeapDumpPath=/home/alex/java_error_in_PYCHARM.hprof -Didea.paths.selector=PyCharmCE2016.3 -Djb.vmOptionsFile=bin/pycharm64.vmoptions -Didea.platform.prefix=PyCharmCore 
+2017-03-22 12:55:32,754 [     12]   INFO -        #com.intellij.idea.Main - ext: /home/alex/pycharm-community-2016.3.3/jre/jre/lib/ext: [jaccess.jar, sunpkcs11.jar, jfxrt.jar, zipfs.jar, meta-index, nashorn.jar, localedata.jar, dnsns.jar, sunec.jar, sunjce_provider.jar, cldrdata.jar] 
+2017-03-22 12:55:32,754 [     12]   INFO -        #com.intellij.idea.Main - JNU charset: UTF-8 
+2017-03-22 12:55:32,770 [     28]   INFO -        #com.intellij.idea.Main - JNA library (64-bit) loaded in 16 ms 
+2017-03-22 12:55:36,716 [   3974]   INFO - .intellij.idea.IdeaApplication - WM detected: Compiz 
+2017-03-22 12:55:37,190 [   4448]   INFO - llij.ide.plugins.PluginManager - 16 plugins initialized in 453 ms 
+2017-03-22 12:55:37,191 [   4449]   INFO - llij.ide.plugins.PluginManager - Loaded bundled plugins: CVS Integration (11), EditorConfig (163.15188.4), Git Integration (8.1), GitHub (163.15188.4), IDEA CORE (163.15188.4), IPython Notebook (0.1), IntelliLang (8.0), Python IntelliLang (VERSION), Python ReStructureText Integration (1.0), Python Terminal (VERSION), ReStructuredText Support (136.SNAPSHOT), Settings Repository (163.15188.4), Subversion Integration (1.1), Task Management (1.0), Terminal (0.1), hg4idea (10.0) 
+2017-03-22 12:55:37,861 [   5119]   INFO - ellij.vfs.persistent.FSRecords - Marking VFS as corrupted: '/home/alex/.PyCharmCE2016.3/system/caches/names.dat' does not exist 
+2017-03-22 12:55:37,863 [   5121]   INFO - ellij.util.io.PagedFileStorage - lower=100; upper=500; buffer=10; max=705 
+2017-03-22 12:55:37,890 [   5148]   INFO - pl.local.NativeFileWatcherImpl - Starting file watcher: /home/alex/pycharm-community-2016.3.3/bin/fsnotifier64 
+2017-03-22 12:55:37,901 [   5159]   INFO - pl.local.NativeFileWatcherImpl - Native file watcher is operational. 
+2017-03-22 12:55:38,222 [   5480]   INFO - .history.utils.LocalHistoryLog - local history version mismatch (was: 0, expected: 6), rebuilding... 
+2017-03-22 12:55:38,222 [   5480]   INFO - .history.utils.LocalHistoryLog - FS has been rebuild, rebuilding local history... 
+2017-03-22 12:55:38,725 [   5983]   INFO - rains.ide.BuiltInServerManager - built-in server started, port 63342 
+2017-03-22 12:55:38,759 [   6017]   INFO - gs.impl.UpdateCheckerComponent - channel: release 
+2017-03-22 12:55:38,886 [   6144]   INFO - il.indexing.FileBasedIndexImpl - Index exts enumerated:59 
+2017-03-22 12:55:38,890 [   6148]   INFO - il.indexing.FileBasedIndexImpl - Index scheduled:3 
+2017-03-22 12:55:38,908 [   6166]   INFO - tellij.psi.stubs.StubIndexImpl - All stub exts enumerated:11 
+2017-03-22 12:55:38,909 [   6167]   INFO - tellij.psi.stubs.StubIndexImpl - stub exts update scheduled:0 
+2017-03-22 12:55:38,980 [   6238]   INFO - j.ide.script.IdeStartupScripts - 0 startup script(s) found 
+2017-03-22 12:55:39,149 [   6407]   INFO - plication.impl.ApplicationImpl - 75 application components initialized in 1758ms 
+2017-03-22 12:55:39,229 [   6487]   INFO - .intellij.idea.IdeaApplication - App initialization took 12776 ms 
+2017-03-22 12:55:39,418 [   6676]   INFO - ij.psi.stubs.StubUpdatingIndex - Following new file types will be indexed:XML,HTML,Python,PythonStub 
+2017-03-22 12:55:39,627 [   6885]   INFO - pl$FileIndexDataInitialization - Initialization done:737 
+2017-03-22 12:55:39,699 [   6957]   INFO - exImpl$StubIndexInitialization - Initialization done:71 
+2017-03-22 12:55:40,060 [   7318]   INFO - .intellij.idea.IdeaApplication - IdeaApplication.loadProject 
+2017-03-22 12:55:40,067 [   7325]   INFO - ellij.ide.CommandLineProcessor - External command line: 
+2017-03-22 12:55:40,068 [   7326]   INFO - ellij.ide.CommandLineProcessor - Dir: null 
+2017-03-22 12:55:40,068 [   7326]   INFO - ellij.ide.CommandLineProcessor - --help 
+2017-03-22 12:55:40,068 [   7326]   INFO - ellij.ide.CommandLineProcessor - ----- 
+2017-03-22 12:55:40,793 [   8051]   INFO - ellij.project.impl.ProjectImpl - 15 project components initialized in 240 ms 
+2017-03-22 12:55:40,794 [   8052]   INFO - le.impl.ModuleManagerComponent - 0 module(s) loaded in 0 ms 
+2017-03-22 12:55:40,867 [   8125]   INFO - .openapi.application.Preloader - Finished preloading com.intellij.openapi.actionSystem.impl.ActionPreloader@3b8bae4a 
+2017-03-22 12:55:41,094 [   8352]   INFO - .openapi.application.Preloader - Finished preloading com.intellij.ide.ui.search.SearchableOptionPreloader@3fb73488 
+2017-03-22 12:55:41,198 [   8456]   INFO - .openapi.application.Preloader - Finished preloading com.intellij.codeInsight.completion.CompletionPreloader@577c399c 
+2017-03-22 12:55:53,359 [  20617]   INFO - .script.IdeScriptEngineManager - javax.script.ScriptEngineManager initialized in 13 ms 
+2017-03-22 12:57:06,279 [  93537]   INFO - tellij.xml.Html5SchemaProvider - HTML5_SCHEMA_LOCATION = /home/alex/pycharm-community-2016.3.3/lib/pycharm.jar!/resources/html5-schema/html5.rnc 
+2017-03-22 12:57:06,279 [  93537]   INFO - tellij.xml.Html5SchemaProvider - XHTML5_SCHEMA_LOCATION = /home/alex/pycharm-community-2016.3.3/lib/pycharm.jar!/resources/html5-schema/xhtml5.rnc 
+2017-03-22 12:57:06,280 [  93538]   INFO - tellij.xml.Html5SchemaProvider - CHARS_DTD_LOCATION = /home/alex/pycharm-community-2016.3.3/lib/pycharm.jar!/resources/html5-schema/html5chars.ent 
