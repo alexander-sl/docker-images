@@ -5,7 +5,7 @@ RUN sudo apt-get update && \
     sudo dpkg --add-architecture i386 && \
     sudo apt-get update && \
     sudo apt-get install -y make gcc libc6:i386 gcc-multilib libncurses5-dev:i386 dpkg-dev \
-    libreadline6-dev && \
+    libreadline6-dev gdb && \
     sudo ln -s /usr/bin/make /usr/bin/gmake && \
     sudo apt-get clean -y && \
     sudo rm -rf /var/lib/apt/lists/* && \
