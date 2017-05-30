@@ -2,8 +2,8 @@ FROM alexsl/xenial-jdk:latest
 MAINTAINER alexsl
 
 RUN sudo apt-get update && \
-    sudo apt-get install -y libgtk2.0-0 libcanberra-gtk-module libxext-dev \
-    libxrender-dev libxtst-dev && \
+    sudo apt-get install -y libgtk2.0-0 libcanberra-gtk-module \
+    libxext-dev libxrender-dev libxtst-dev && \
     sudo apt-get clean -y && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sudo rm -rf /tmp/*
