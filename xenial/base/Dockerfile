@@ -2,8 +2,8 @@ FROM ubuntu:xenial
 MAINTAINER alexsl
 
 RUN apt-get update && apt-get install -y software-properties-common && \
-    apt-get install -y libxext-dev libxrender-dev libxtst-dev sudo \
-    ssh git mercurial subversion vim && \
+    apt-get install -y sudo \
+    ssh git mercurial subversion vim mc && \
     apt-get -y clean && \
     mkdir -p /home/developer && \
     echo "developer:x:1000:1000:developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \

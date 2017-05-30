@@ -4,7 +4,9 @@ MAINTAINER alexsl
 RUN sudo apt-get update && \
     sudo apt-get install -y make gcc libc6 gcc-multilib libncurses5-dev dpkg-dev \
     libreadline6-dev gdb libffi-dev libssl-dev python3-pip cmake sqlite3  \
-    libpython2.7-dev build-essential wget flex libfl-dev gettext mc \
+    libpython2.7-dev build-essential wget flex libfl-dev gettext \
+    bison automake libtool freebsd-buildutils \
+    cpio bc acl acl-dev \
     autotools-dev locate && \
     sudo pip3 install --upgrade pip && \
     sudo ln -s /usr/bin/make /usr/bin/gmake && \
