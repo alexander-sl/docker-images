@@ -1,0 +1,12 @@
+####
+# Needed by start-ipi-debug.py script
+appdirs
+cryptography
+pexpect
+fabric3
+
+####
+# Needed by import_defs_from_larchos.py script
+lxml
+pytidylib
+
