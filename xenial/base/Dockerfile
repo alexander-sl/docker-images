@@ -3,7 +3,7 @@ MAINTAINER alexsl
 
 RUN apt-get update && apt-get install -y software-properties-common && \
     apt-get install -y sudo \
-    ssh git mercurial subversion vim mc && \
+    ssh git mercurial subversion vim mc tmux && \
     apt-get -y clean && \
     mkdir -p /home/developer && \
     echo "developer:x:1000:1000:developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
