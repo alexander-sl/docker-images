@@ -1,4 +1,4 @@
-FROM alexsl/xenial-pycharm-2016.3.3:latest
+FROM ##base_image
 MAINTAINER alexsl
 
 RUN export uid=1000 gid=1000

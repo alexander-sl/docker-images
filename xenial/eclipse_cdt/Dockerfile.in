@@ -1,4 +1,4 @@
-FROM alexsl/xenial-gtk:latest
+FROM ##base_image
 MAINTAINER alexsl
 
 ENV DISPLAY=${DISPLAY}
