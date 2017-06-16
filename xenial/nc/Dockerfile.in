@@ -5,8 +5,8 @@ RUN sudo apt-get update && \
     sudo apt-get install -y make gcc libc6 gcc-multilib libncurses5-dev dpkg-dev \
     libreadline6-dev gdb libffi-dev libssl-dev python3-pip cmake sqlite3  \
     libpython2.7-dev build-essential wget flex libfl-dev gettext \
-    bison automake libtool freebsd-buildutils && \
-    autopoint texinfo \
+    bison automake libtool freebsd-buildutils \
+    autopoint texinfo  bison automake libtool \
     cpio bc acl acl-dev \
     autotools-dev locate && \
     sudo pip3 install --upgrade pip && \
@@ -15,3 +15,5 @@ RUN sudo apt-get update && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sudo rm -rf /tmp/*
 
+RUN sudo apt-get install -y freebsd-buildutils && \
+    ln -s /usr/bin/fmtree /usr/bin/freebsd-mtree

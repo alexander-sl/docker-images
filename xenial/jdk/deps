@@ -1,1 +1,1 @@
-DEPS_xenial_jdk="xenial/base/Dockerfile"
+DEPS_xenial_jdk="xenial/base/Dockerfile.in"
