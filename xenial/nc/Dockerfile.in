@@ -11,7 +11,7 @@ RUN sudo apt-get update  \
     autotools-dev locate \
     && sudo pip3 install --upgrade pip \
     && sudo ln -s /usr/bin/make /usr/bin/gmake \
-    && sudo ln -s /usr/bin/fmtree /usr/bin/freebsd-mtree
+    && sudo ln -s /usr/bin/fmtree /usr/bin/freebsd-mtree \
     && sudo apt-get clean -y \
     && sudo rm -rf /var/lib/apt/lists/* \
     && sudo rm -rf /tmp/*
