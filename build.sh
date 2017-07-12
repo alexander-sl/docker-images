@@ -24,7 +24,7 @@ build_image() {
 
     echo "Building $docker_image $base_image..."
 
-    docker build --build-arg DOCKER_GROUP=${DOCKER_GROUP} --build-arg USERID=${USERID} --build-arg GROUPID=${GROUPID} -f ${dockerfile_path} -t ${docker_image}:${TAG} ${dockerfile_dir}
+    docker build --pull --build-arg DOCKER_GROUP=${DOCKER_GROUP} --build-arg USERID=${USERID} --build-arg GROUPID=${GROUPID} -f ${dockerfile_path} -t ${docker_image}:${TAG} ${dockerfile_dir}
 }
 
 build_dep() {
