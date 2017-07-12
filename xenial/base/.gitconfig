@@ -1,0 +1,28 @@
+[color]
+	diff = auto
+	ui = auto
+[push]
+	default = simple
+[alias]
+    lg = log --color --graph --all --pretty=format:'%C(yellow)%h %Cgreen%cd, %<(6,trunc)%cr %C(bold blue)%<(11,trunc)%an%Creset%C(auto)%d%Creset %<(100,trunc)%s' --date=format:'%e.%m' --topo-order
+    lg-old = log --color --graph --all --decorate --date-order --oneline
+	lgf = log --color --graph --all --decorate --topo-order --oneline
+	lgr = log --color --graph --all --pretty=format:'%Cred%h%Creset -%C\\(yellow\\)%d%Creset %s %Cgreen\\(%cr\\) %C\\(bold blue\\)<%an>%Creset' --abbrev-commit
+    lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    lg3 = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	stsh = stash --keep-index
+	staash = stash --include-untracked
+	staaash = stash --all
+	please = push --force-with-lease
+	commend = commit --amend --no-edit
+	it = !git init && git commit -m “root” --allow-empty
+	st = status --short --branch
+	merc = merge --no-ff
+	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
+#    lg = !"git lg1"
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

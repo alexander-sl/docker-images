@@ -5,27 +5,34 @@ ARG USER=developer
 ARG DOCKER_GROUP=999
 ARG USERID=1000
 ARG GROUPID=1000
+ARG HOME=/home/${USER}
 
-RUN groupadd -g ${DOCKER_GROUP} docker && \
-    mkdir -p /home/${USER} && \
-    echo "${USER}:x:${USERID}:${GROUPID}:${USER},,,:/home/${USER}:/bin/bash" >> /etc/passwd && \
-    echo "${USER}:x:${GROUPID}:" >> /etc/group && \
-    mkdir -p /etc/sudoers.d/ && \
-    echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} && \
-    chown ${USER}:${USER} -R /home/${USER} && \
-    chmod 0440 /etc/sudoers.d/${USER} && \
-    usermod -aG docker ${USER} && \
-    sed -i 's/archive.ubuntu.com/ua.archive.ubuntu.com/' /etc/apt/sources.list && \
-    apt-get update && apt-get install -y software-properties-common && \
-    apt-get install -y sudo \
-    ssh git mercurial subversion vim mc tmux && \
-    apt-get -y clean && \
-    chown ${USER}:${USER} -R /home/${USER} && \
-    usermod -aG docker ${USER} && \
-    apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/*
+# Adding ${USER} to the container system
+COPY /.bashrc ${HOME}/
+COPY /.gitconfig ${HOME}/
+RUN groupadd -g ${DOCKER_GROUP} docker \
+    && mkdir -p ${HOME} \
+    && echo "${USER}:x:${USERID}:${GROUPID}:${USER},,,:${HOME}:/bin/bash" >> /etc/passwd \
+    && echo "${USER}:x:${GROUPID}:" >> /etc/group \
+    && mkdir -p /etc/sudoers.d/ \
+    && echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} \
+    && chown ${USER}:${USER} -R ${HOME} \
+    && chmod 0440 /etc/sudoers.d/${USER} \
+    && usermod -aG docker ${USER}
 
-USER ${USER}
-ENV HOME /home/${USER}
-WORKDIR /home/${USER}
+# Installing generic packages 
+RUN sed -i 's/archive.ubuntu.com/ua.archive.ubuntu.com/' /etc/apt/sources.list \
+    && apt-get update \
+    && apt-get install -y software-properties-common \
+    && apt-get install -y sudo ssh git mercurial subversion vim mc tmux \
+    && apt-get -y clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
+
+USER developer
+
+ENV USER=${USER}
+#XXX is HOME env variable really required?
+ENV HOME=${HOME}
+
+WORKDIR ${HOME}
