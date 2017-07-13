@@ -1,30 +1,38 @@
 FROM ubuntu:xenial
 MAINTAINER alexsl
 
+ARG USER=developer
 ARG DOCKER_GROUP=999
 ARG USERID=1000
 ARG GROUPID=1000
+ARG HOME=/home/${USER}
 
-RUN groupadd -g ${DOCKER_GROUP} docker && \
-    mkdir -p /home/developer && \
-    echo "developer:x:${USERID}:${GROUPID}:developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
-    echo "developer:x:${GROUPID}:" >> /etc/group && \
-    mkdir -p /etc/sudoers.d/ && \
-    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
-    chown developer:developer -R /home/developer && \
-    chmod 0440 /etc/sudoers.d/developer && \
-    usermod -aG docker developer && \
-    sed -i 's/archive.ubuntu.com/ua.archive.ubuntu.com/' /etc/apt/sources.list && \
-    apt-get update && apt-get install -y software-properties-common && \
-    apt-get install -y sudo \
-    ssh git mercurial subversion vim mc tmux && \
-    apt-get -y clean && \
-    chown developer:developer -R /home/developer && \
-    usermod -aG docker developer && \
-    apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/*
+# Adding ${USER} to the container system
+COPY /.bashrc ${HOME}/
+COPY /.gitconfig ${HOME}/
+RUN groupadd -g ${DOCKER_GROUP} docker \
+    && mkdir -p ${HOME} \
+    && echo "${USER}:x:${USERID}:${GROUPID}:${USER},,,:${HOME}:/bin/bash" >> /etc/passwd \
+    && echo "${USER}:x:${GROUPID}:" >> /etc/group \
+    && mkdir -p /etc/sudoers.d/ \
+    && echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} \
+    && chown ${USER}:${USER} -R ${HOME} \
+    && chmod 0440 /etc/sudoers.d/${USER} \
+    && usermod -aG docker ${USER}
+
+# Installing generic packages 
+RUN sed -i 's/archive.ubuntu.com/ua.archive.ubuntu.com/' /etc/apt/sources.list \
+    && apt-get update && apt upgrade -y \
+    && apt-get install -y software-properties-common \
+    && apt-get install -y sudo ssh git mercurial subversion vim mc tmux curl \
+    && apt-get -y clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
 
 USER developer
-ENV HOME /home/developer
-WORKDIR /home/developer
+
+ENV USER=${USER}
+#XXX is HOME env variable really required?
+ENV HOME=${HOME}
+
+WORKDIR ${HOME}
