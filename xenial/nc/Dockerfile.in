@@ -1,8 +1,8 @@
 FROM ##base_image
 MAINTAINER alexsl
 
-RUN sudo apt-get update && \
-    sudo apt-get install -y make gcc libc6 gcc-multilib libncurses5-dev dpkg-dev \
+RUN sudo apt-get update  \
+    && sudo apt-get install -y make gcc libc6 gcc-multilib libncurses5-dev dpkg-dev \
     libreadline6-dev gdb libffi-dev libssl-dev python3-pip cmake sqlite3  \
     libpython2.7-dev build-essential wget flex libfl-dev gettext \
     bison automake libtool freebsd-buildutils \

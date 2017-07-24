@@ -1,3 +1,5 @@
+#!/bin/bash
+
 USAGE_STRING="Usage: ./build.sh <image_prefix> <dockerfile_path>\nimageprefix: <image_prefix>/<image_name>dockerfile_path: relative path to Dockerfile (xenial/base/Dockerfile)image name would look like <prefix>/xenial/base"
 
 IMAGE_PREFIX=$1
@@ -39,11 +41,9 @@ build_dep() {
     if [ -f $dockerfile_path ]; then
         # Dockerfile exists
         # Check image exists...
-        image_built=`docker images | grep $docker_image | awk '{ print $1 }'`
-        if [ -z $image_built ]; then
-
-
-            echo "No built image $docker_image found."
+#        image_built=`docker images | grep $docker_image | awk '{ print $1 }'`
+#        if [ -z $image_built ]; then
+#            echo "No built image $docker_image found."
 
             if [ -f $dockerfile_dir/deps ]; then
                 #Image has dependencies
@@ -58,9 +58,9 @@ build_dep() {
             else
                 build_image $dockerfile_path
             fi
-        else
-            echo "Image $docker_image is already built"
-        fi
+#        else
+#            echo "Image $docker_image is already built"
+#        fi
     fi
 }
 
