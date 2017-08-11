@@ -1,6 +1,10 @@
 FROM ##base_image
 MAINTAINER alexsl
 
+ARG DOCKER_GROUP
+ARG USERID
+ARG GROUPID
+
 RUN sudo apt-get update  \
     && sudo apt-get install -y make gcc libc6 gcc-multilib libncurses5-dev dpkg-dev \
     libreadline6-dev gdb libffi-dev libssl-dev python3-pip cmake sqlite3  \
