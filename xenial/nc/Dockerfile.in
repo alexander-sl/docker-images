@@ -12,10 +12,13 @@ RUN sudo apt-get update  \
     bison automake libtool freebsd-buildutils \
     autopoint texinfo  bison automake libtool \
     cpio bc acl acl-dev \
-    autotools-dev locate && \
+    autotools-dev locate \
+    npm ruby2.3 ruby-dev && \
     sudo pip3 install --upgrade pip && \
     sudo ln -s /usr/bin/make /usr/bin/gmake && \
     sudo ln -s /usr/bin/fmtree /usr/bin/freebsd-mtree && \
+    sudo ln -s /usr/bin/nodejs /usr/bin/node && \
+    sudo gem install sass --no-user-install && \
     sudo apt-get clean -y && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sudo rm -rf /tmp/*
