@@ -69,13 +69,13 @@ if [ -z $TAG]; then
 fi
 if [ -z $IMAGE_PREFIX ]; then
     echo "Error. Image prefix isn\'t specified"
-    echo $USAGE_STRING
+    echo -e $USAGE_STRING
     exit 1
 fi
 
 if [ -z $DOCKERFILE_PATH ]; then
     echo Error. Dockerfile path isn\'t specified
-    echo $USAGE_STRING
+    echo -e $USAGE_STRING
     exit 1
 fi
 
@@ -90,9 +90,5 @@ fi
 
 echo Building image \'${DOCKER_IMAGE}\' from ${DOCKERFILE_PATH}, docker groupid is \'${DOCKER_GROUP}\'
 
-if [ -f $DOCKERFILE_PATH/deps ]; then
-    source $DOCKERFILE_PATH/deps
-
-fi
 build_dep $DOCKERFILE_PATH
 

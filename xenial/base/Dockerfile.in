@@ -22,6 +22,7 @@ RUN groupadd -g ${DOCKER_GROUP} docker \
 
 # Installing generic packages 
 RUN sed -i 's/archive.ubuntu.com/ua.archive.ubuntu.com/' /etc/apt/sources.list \
+    && sed -i 's/security.ubuntu.com/ua.archive.ubuntu.com/' /etc/apt/sources.list \
     && apt-get update && apt upgrade -y \
     && apt-get install -y software-properties-common \
     && apt-get install -y sudo ssh git mercurial subversion vim mc tmux curl \
