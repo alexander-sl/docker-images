@@ -1,0 +1,49 @@
+FROM ##base_image
+MAINTAINER zhr
+
+ARG DOCKER_GROUP
+ARG USERID
+ARG GROUPID
+
+#gmake symlink is required for CPSS compilation
+#Next packages are required for libnss-tacplus building :
+#  debhelper dh-autoreconf autoconf-archive libaudit-dev libpam-dev 
+RUN sudo apt-get update \
+    && sudo dpkg --add-architecture i386 \
+    && sudo apt-get update \
+    && sudo apt-get install -y \
+      make gcc libc6:i386 gcc-multilib dpkg-dev \
+      libreadline6-dev gdb libffi-dev libssl-dev libssl-dev:i386 \
+      libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386 libncurses5-dev:i386 \
+      wget cpio pigz unzip bc \
+    && sudo ln -s /usr/bin/make /usr/bin/gmake \
+    && sudo apt-get install -y \
+      debhelper dh-autoreconf autoconf-archive libaudit-dev:i386 libpam-dev:i386 \
+    && sudo apt-get clean -y \
+    && sudo rm -rf /var/lib/apt/lists/* \
+    && sudo rm -rf /tmp/*
+
+# Building libnss-tacplus and packages it is dependent on
+RUN sudo mkdir -p /usr/src/nss && sudo chown $USER /usr/src/nss \
+    && cd /usr/src/nss \
+    && git clone https://github.com/daveolson53/libtacplus-map.git \
+    && git clone https://github.com/daveolson53/pam_tacplus.git \
+    && git clone https://github.com/daveolson53/libnss-tacplus.git
+
+#RUN sudo mkdir -p /usr/src/nss && sudo chown $USER /usr/src/nss \
+#    && cd /usr/src/nss \
+#    && git clone https://github.com/daveolson53/libtacplus-map.git \
+##    && cd libtacplus-map && dpkg-buildpackage -ai386 && cd - \
+#    && sudo dpkg -i libtacplus-map-dev*deb libtacplus-map*deb \
+#    && git clone https://github.com/daveolson53/pam_tacplus.git \
+#    && cd pam_tacplus && dpkg-buildpackage -b -ai386 && cd - \
+#    && sudo dpkg -i libtac-dev*deb libtac2*.deb libpam-tacplus-dev*deb libpam-tacplus*.deb \
+#    && git clone https://github.com/daveolson53/libnss-tacplus.git \
+#    && cd libnss-tacplus && dpkg-buildpackage -ai386 && cd -
+
+#RUN sudo mkdir /home/ipi \
+#    && sudo chown -R developer:developer /home/ipi
+
+# Install Docker - we can't use one installed on the host system because we are inside different OS with different libraries
+#RUN curl -fsSL get.docker.com -o get-docker.sh && sudo sh get-docker.sh && sudo usermod -aG docker developer
+
