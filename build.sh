@@ -1,16 +1,57 @@
 #!/bin/bash
 
-USAGE_STRING="Usage: ./build.sh <image_prefix> <dockerfile_path>\nimageprefix: <image_prefix>/<image_name>dockerfile_path: relative path to Dockerfile (xenial/base/Dockerfile)image name would look like <prefix>/xenial/base"
+USAGE_STRING="Usage: ./build.sh PREFIX DOCKERFILE_PATH [TAG] [UID] [GID]\n  \
+    PREFIX: some prefix for resulted image (e.g. ci)\n  \
+    DOCKERFILE_PATH: relative path to Dockerfile (e.g. xenial/ops/Dockerfile.in)\n  \
+    resulted image name will look like ci/xenial/ops\n  \
+    TAG: tag to mark resulted image ('latest' will be used by default)\n  \
+    UID: uid to be specified for 'developer' account inside image - current user uid by default\n  \
+    GID: gid to be specified for 'developer' account inside image - current user gid by default"
 
-IMAGE_PREFIX=$1
-DOCKERFILE_PATH=$2
-TAG=$3
+
+IMAGE_PREFIX="$1"
+shift
+if [ -z $IMAGE_PREFIX ]; then
+    echo "Error. Image prefix isn\'t specified"
+    echo -e $USAGE_STRING
+    exit 1
+fi
+
+DOCKERFILE_PATH="$1"
+shift
+if [ -z $DOCKERFILE_PATH ]; then
+    echo Error. Dockerfile path isn\'t specified
+    echo -e $USAGE_STRING
+    exit 1
+fi
+
+if ! [ -f $DOCKERFILE_PATH ]; then
+    echo "File ${DOCKERFILE_PATH} doesn't exists"
+    exit 1
+fi
+
+TAG="$1"
+shift
+if [ -z $TAG ]; then
+    TAG=latest
+fi
+
+USERID="$1"
+shift
+if [ -z $USERID ]; then
+    USERID=`whoami | xargs id -u`
+fi
+
+GROUPID="$1"
+shift
+if [ -z $GROUPID ]; then
+    GROUPID=`whoami | xargs id -g`
+fi
+
 DOCKER_GROUP=`cat /etc/group | grep docker | cut -d: -f 3`
-DOCKERFILE_DIR=`dirname ${DOCKERFILE_PATH}`
-DOCKER_IMAGE="${IMAGE_PREFIX}/${DOCKERFILE_DIR}"
-USERID=`whoami | xargs id -u`
-GROUPID=`whoami | xargs id -g`
-
+if [ -z $DOCKER_GROUP ]; then
+    DOCKER_GROUP=999
+fi
 
 build_image() {
     dockerfile_path=$1
@@ -64,30 +105,9 @@ build_dep() {
     fi
 }
 
-if [ -z $TAG]; then
-    TAG=latest
-fi
-if [ -z $IMAGE_PREFIX ]; then
-    echo "Error. Image prefix isn\'t specified"
-    echo -e $USAGE_STRING
-    exit 1
-fi
 
-if [ -z $DOCKERFILE_PATH ]; then
-    echo Error. Dockerfile path isn\'t specified
-    echo -e $USAGE_STRING
-    exit 1
-fi
-
-if ! [ -f $DOCKERFILE_PATH ]; then
-    echo "File ${DOCKERFILE_PATH} doesn't exists"
-    exit 1
-fi
-
-if [ -z DOCKER_GROUP ]; then
-    DOCKER_GROUP=999
-fi
-
+DOCKERFILE_DIR=`dirname ${DOCKERFILE_PATH}`
+DOCKER_IMAGE="${IMAGE_PREFIX}/${DOCKERFILE_DIR}"
 echo Building image \'${DOCKER_IMAGE}\' from ${DOCKERFILE_PATH}, docker groupid is \'${DOCKER_GROUP}\'
 
 build_dep $DOCKERFILE_PATH
