@@ -61,11 +61,11 @@ build_image() {
         base_image_name=`dirname $2`
         base_image_name=${IMAGE_PREFIX}/${base_image_name}
         base_image_name=`echo $base_image_name | sed 's=/=\\\/=g'`
-        `sed -e "s/##base_image/${base_image_name}/g" $dockerfile_path > $dockerfile_dir/Dockerfile`
+        `sed -e "s/##base_image/${base_image_name}:${TAG}/g" $dockerfile_path > $dockerfile_dir/Dockerfile`
         dockerfile_path=$dockerfile_dir/Dockerfile
     fi
 
-    echo "Building $docker_image $base_image..."
+    echo "... building $docker_image $base_image ..."
 
     docker build --build-arg DOCKER_GROUP=${DOCKER_GROUP} --build-arg USERID=${USERID} --build-arg GROUPID=${GROUPID} -f ${dockerfile_path} -t ${docker_image}:${TAG} ${dockerfile_dir}
 }
@@ -77,7 +77,7 @@ build_dep() {
     local deps_suffix=`echo ${dockerfile_dir} | sed 's/\//_/g'`
     local deps_var="DEPS_${deps_suffix}"
     local docker_image="${IMAGE_PREFIX}/${dockerfile_dir}"
-    echo "Processing $dockerfile_path image $docker_image..."
+    echo "== Processing $dockerfile_path image $docker_image..."
 
     if [ -f $dockerfile_path ]; then
         # Dockerfile exists
@@ -88,11 +88,11 @@ build_dep() {
 
             if [ -f $dockerfile_dir/deps ]; then
                 #Image has dependencies
-                echo "Image $docker_image has dependencies"
+                echo "=== Image $docker_image has dependencies"
                 source $dockerfile_dir/deps
                 local deps=${!deps_var}
                 if ! [ -z $deps ]; then
-                    echo "Processing dependency $deps for $docker_image"
+                    echo "==== Processing dependency $deps for $docker_image"
                     build_dep $deps
                 fi
                 build_image $dockerfile_path $deps
@@ -108,7 +108,7 @@ build_dep() {
 
 DOCKERFILE_DIR=`dirname ${DOCKERFILE_PATH}`
 DOCKER_IMAGE="${IMAGE_PREFIX}/${DOCKERFILE_DIR}"
-echo Building image \'${DOCKER_IMAGE}\' from ${DOCKERFILE_PATH}, docker groupid is \'${DOCKER_GROUP}\'
+echo = Building image \'${DOCKER_IMAGE}\' from ${DOCKERFILE_PATH}, docker groupid is \'${DOCKER_GROUP}\'
 
 build_dep $DOCKERFILE_PATH
 
