@@ -21,11 +21,15 @@ RUN groupadd -g ${DOCKER_GROUP} docker \
     && usermod -aG docker ${USER}
 
 # Installing generic packages 
-RUN sed -i 's/deb.debian.org/ftp.ua.debian.org/' /etc/apt/sources.list \
+RUN echo "deb http://ftp.ua.debian.org/debian jessie main" > /etc/apt/sources.list \
+    && echo "deb http://security.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list \
     && apt-get update && apt upgrade -y \
     && apt-get install -y software-properties-common \
-    && apt-get install -y sudo ssh git vim mc tmux curl \
+    && apt-get install -y sudo ssh git vim mc tmux curl bash-completion tcl-dev gettext \
     && apt-get -y clean \
+    && cd /tmp && curl -L https://www.kernel.org/pub/software/scm/git/git-2.7.4.tar.gz -o git-2.7.4.tar.gz \
+    && tar -xvzf git-2.7.4.tar.gz && cd git-2.7.4 \
+    && ./configure --prefix=/usr && make && sudo make install \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/*
 

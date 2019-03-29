@@ -1,0 +1,13 @@
+FROM ##base_image
+MAINTAINER alexsl
+
+ARG DOCKER_GROUP
+ARG USERID
+ARG GROUPID
+
+RUN sudo apt-get update && \
+    sudo apt-get install -y libgtk-3-0 libcanberra-gtk3-module \
+    libxext-dev libxrender-dev libxtst-dev && \
+    sudo apt-get clean -y && \
+    sudo rm -rf /var/lib/apt/lists/* && \
+    sudo rm -rf /tmp/*

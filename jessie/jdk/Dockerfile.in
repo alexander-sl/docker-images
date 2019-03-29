@@ -1,7 +1,9 @@
-FROM alexsl/jessie-base:latest
+FROM ##base_image
 MAINTAINER alexsl
 
-RUN export uid=1000 gid=1000
+ARG DOCKER_GROUP
+ARG USERID
+ARG GROUPID
 
 RUN sudo echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" \
     | sudo tee /etc/apt/sources.list.d/webupd8team-java.list && \
@@ -15,19 +17,3 @@ RUN sudo echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
     sudo apt-get clean -y && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sudo rm -rf /tmp/*
-
-RUN sudo apt-get update && \
-    sudo apt-get install -y libgtk2.0-0 libcanberra-gtk-module libxext-dev \
-    libxrender-dev libxtst-dev && \
-    sudo apt-get clean -y && \
-    sudo rm -rf /var/lib/apt/lists/* && \
-    sudo rm -rf /tmp/*
-
-ENV DISPLAY=${DISPLAY}
-
-RUN wget http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/epp/downloads/release/neon/2/eclipse-cpp-neon-2-linux-gtk-x86_64.tar.gz && \
-    tar xzvf eclipse-cpp-neon-2-linux-gtk-x86_64.tar.gz && \
-    rm eclipse-cpp-neon-2-linux-gtk-x86_64.tar.gz
-
-CMD [ "/home/developer/eclipse/eclipse"]
-
