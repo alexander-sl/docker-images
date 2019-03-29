@@ -1,1 +1,1 @@
-DEPS_jessie_ipi_sdk="jessie/base/Dockerfile.in"
+DEPS_jessie_ipi_sdk="jessie/eclipse_cdt/Dockerfile.in"

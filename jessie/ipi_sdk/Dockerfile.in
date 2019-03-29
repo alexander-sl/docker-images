@@ -24,4 +24,3 @@ RUN sudo mkdir /home/ipi \
 
 # Install Docker - we can't use one installed on the host system because we are inside different OS with different libraries
 RUN curl -fsSL get.docker.com -o get-docker.sh && sudo sh get-docker.sh && sudo usermod -aG docker developer
-
