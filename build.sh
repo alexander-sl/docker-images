@@ -112,3 +112,5 @@ echo = Building image \'${DOCKER_IMAGE}\' from ${DOCKERFILE_PATH}, docker groupi
 
 build_dep $DOCKERFILE_PATH
 
+# run bin create script
+./create_binary.sh $IMAGE_PREFIX $DOCKERFILE_DIR
