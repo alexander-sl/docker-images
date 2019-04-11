@@ -1,0 +1,27 @@
+FROM ##base_image
+MAINTAINER zhr
+
+ARG DOCKER_GROUP
+ARG USERID
+ARG GROUPID
+
+#gmake symlink is required for CPSS compilation
+RUN sudo apt-get update \
+    && sudo dpkg --add-architecture i386 \
+    && sudo apt-get update \
+    && sudo apt-get install -y \
+      make gcc libc6:i386 gcc-multilib dpkg-dev \
+      libreadline6-dev gdb libffi-dev libssl-dev libssl-dev:i386 \
+      libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386 libncurses5-dev:i386 \
+      wget cpio pigz unzip bc \
+      genisoimage automake debootstrap \
+    && sudo ln -s /usr/bin/make /usr/bin/gmake \
+    && sudo apt-get clean -y \
+    && sudo rm -rf /var/lib/apt/lists/* \
+    && sudo rm -rf /tmp/*
+
+RUN sudo mkdir /home/ipi \
+    && sudo chown -R developer:developer /home/ipi
+
+# Install Docker - we can't use one installed on the host system because we are inside different OS with different libraries
+RUN curl -fsSL get.docker.com -o get-docker.sh && sudo sh get-docker.sh && sudo usermod -aG docker developer

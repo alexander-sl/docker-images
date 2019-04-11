@@ -1,0 +1,37 @@
+FROM debian:stretch
+MAINTAINER rzhurak@larch-networks.com
+
+ARG USER=developer
+ARG DOCKER_GROUP=999
+ARG USERID=1000
+ARG GROUPID=1000
+ARG HOME=/home/${USER}
+
+# Adding ${USER} to the container system
+COPY /.bashrc ${HOME}/
+COPY /.gitconfig ${HOME}/
+RUN groupadd -g ${DOCKER_GROUP} docker \
+    && mkdir -p ${HOME} \
+    && echo "${USER}:x:${USERID}:${GROUPID}:${USER},,,:${HOME}:/bin/bash" >> /etc/passwd \
+    && echo "${USER}:x:${GROUPID}:" >> /etc/group \
+    && mkdir -p /etc/sudoers.d/ \
+    && echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} \
+    && chown ${USER}:${USER} -R ${HOME} \
+    && chmod 0440 /etc/sudoers.d/${USER} \
+    && usermod -aG docker ${USER}
+
+# Installing generic packages 
+RUN apt-get update \
+    && apt-get install -y software-properties-common \
+    && apt-get install -y sudo ssh git vim mc tmux curl bash-completion tcl-dev gettext \
+    && apt-get -y clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
+
+USER developer
+
+ENV USER=${USER}
+#XXX is HOME env variable really required?
+ENV HOME=${HOME}
+
+WORKDIR ${HOME}
