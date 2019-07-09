@@ -33,7 +33,7 @@ RUN echo "deb http://ftp.ua.debian.org/debian jessie main" > /etc/apt/sources.li
 RUN GIT_VER=git-2.22.0; cd /tmp \
     && curl -L https://www.kernel.org/pub/software/scm/git/${GIT_VER}.tar.xz -o ${GIT_VER}.tar.xz \
     && tar -xaf ${GIT_VER}.tar.xz && cd ${GIT_VER} \
-    && ./configure --prefix=/usr && make && sudo make install \
+    && ./configure --prefix=/usr && make -j$(nproc) && sudo make install \
     && cd - && rm -rf /tmp/*
 
 USER developer
